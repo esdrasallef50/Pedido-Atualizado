@@ -1,12 +1,11 @@
 <!-- 
 =========================================================================
-# PEDIDO DE NAMORO IRRECUSAVEL - V29.4 (Ajuste Perfeito de Fotos)
+# PEDIDO DE NAMORO IRRECUSAVEL - V30.0 (Versão Final Limpa)
 
-Alterações Visuais:
-- Carrossel agora usa 'object-fit: contain' -> NUNCA corta a foto.
-- Proporção alterada para 3/4 (Vertical) para favorecer selfies.
-- Fundo do slide escurecido levemente para destacar fotos horizontais.
-- Altura máxima ajustada (55vh) para garantir que os botões apareçam sem rolar.
+Status:
+- Modo Diagnóstico removido (site pronto para envio).
+- Fotos configuradas e ajustadas (sem cortes).
+- Funcionalidades testadas e aprovadas.
 =========================================================================
 -->
 
@@ -17,6 +16,8 @@ Alterações Visuais:
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta tag para ajudar no carregamento de imagens externas -->
+    <meta name="referrer" content="no-referrer">
     <title>Uma Surpresa Para Você ❤️</title>
     
     <!-- FONTES -->
@@ -129,9 +130,8 @@ Alterações Visuais:
         #proposal-screen { overflow-y: auto; padding: 20px 0; }
         .carousel-container { 
             width: 90%; max-width: 400px; 
-            /* MUDANÇA: Aspect Ratio 3/4 (Vertical) é melhor para fotos de celular */
             aspect-ratio: 3/4; 
-            max-height: 55vh; /* Garante que não fique gigante em telas pequenas */
+            max-height: 55vh; 
             border-radius: 25px; 
             overflow: hidden; margin-bottom: 25px; position: relative; padding: 10px; 
             background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); 
@@ -140,12 +140,10 @@ Alterações Visuais:
         .carousel-inner { 
             width: 100%; height: 100%; border-radius: 18px; 
             overflow: hidden; position: relative; 
-            /* MUDANÇA: Fundo sutil para caso a foto não preencha tudo */
             background: rgba(255, 240, 245, 0.3); 
         }
         .carousel-slide { 
             width: 100%; height: 100%; 
-            /* MUDANÇA CRUCIAL: 'contain' garante que a foto inteira apareça, sem cortes */
             object-fit: contain; 
             position: absolute; top: 0; left: 0; 
             opacity: 0; transition: opacity 1s ease-in-out; 
@@ -333,6 +331,7 @@ Alterações Visuais:
                 await inicializarColecoes();
             } catch (error) {
                 console.error("Erro Firebase:", error.code);
+                // Não alertamos erro de auth para não assustar o usuário, apenas fallback
                 isOfflineMode = true;
             }
         };
